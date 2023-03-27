@@ -2,8 +2,10 @@ import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { AppState } from "../AppState.js";
 import CarCard from "../components/CarCard.jsx";
+import { Car } from "../models/Car.js";
 import { carsService } from "../services/CarsService.js";
 import Pop from "../utils/Pop.js";
+import CarForm from "../components/CarForm.jsx";
 
 function HomePage() {
 
@@ -14,6 +16,11 @@ function HomePage() {
     } catch (error) {
       Pop.error(error.message)
     }
+  }
+
+  // Why no passing to service?
+  function createCar() {
+    AppState.car = new Car({})
   }
 
   // This is like a computed. Here we are computing what cars is, and putting the template for a single carCard in the return. Then we place the {cars} in main return down below which is essentially like a component within a component.
@@ -40,8 +47,8 @@ function HomePage() {
         </div>
         <div className="row sticky-bottom">
           <div className="col-12 text-end">
-            <button className="row btn btn-dark" title="Create Car" onClick={createCar} data-bs-toggle="modal" data-bs-target="#carModal">
-              <span>🚗</span>
+            <button className="row btn btn-dark mb-2 me-2" title="Create Car" onClick={createCar} data-bs-toggle="modal" data-bs-target="#carModal">
+              <span className="p-2">🚗</span>
             </button>
           </div>
         </div>
@@ -55,7 +62,7 @@ function HomePage() {
               <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Car</h1>
               <button className="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            {AppState.car ? <CarForm /> : null}
+            <CarForm />
           </div>
         </div>
       </div>

@@ -24,6 +24,6 @@ export default function CarCard({ car }) {
 
 }
 
-// CarCard.propTypes = {
-//   car: PropTypes.instanceOf(car)
-// }
+CarCard.propTypes = {
+  car: PropTypes.instanceOf(Car)
+}
