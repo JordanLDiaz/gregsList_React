@@ -18,6 +18,18 @@ class CarsService {
     AppState.cars.push(newCar)
   }
 
+  async editCar(formData, carId) {
+    const res = await api.put(`api/cars/${carId}`, formData)
+    console.log('[EDITING CAR]', res.data)
+    let oldCar = AppState.cars.findIndex(c => c.id == carId)
+    AppState.cars.splice(oldCar, 1, new Car(res.data))
+  }
+
+  async removeCar(carId) {
+    const res = await api.delete('api/cars/' + carId)
+    console.log('[REMOVING CAR]', res.data)
+    AppState.cars = AppState.cars.filter(c => c.id != carId)
+  }
 }
 
 export const carsService = new CarsService()

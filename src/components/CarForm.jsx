@@ -17,7 +17,9 @@ function CarForm() {
     try {
       window.event.preventDefault()
       logger.log({ editable })
-      await carsService.createCar(editable)
+      editable.id
+        ? await carsService.editCar(editable, editable.id)
+        : await carsService.createCar(editable)
     }
     catch (error) {
       Pop.error(error.message)
@@ -49,7 +51,7 @@ function CarForm() {
         </div>
         <div className="mb-3">
           <label htmlFor="description" className="form-label">Description</label>
-          <input type="text" defaultValue={editable.description} className="form-control" id="description" placeholder="Description..." name="description" required onChange={bindEditable} />
+          <textarea defaultValue={editable.description} className="form-control" id="description" placeholder="Description..." name="description" rows={3} onChange={bindEditable}></textarea>
         </div>
       </div>
       <div className="modal-footer">

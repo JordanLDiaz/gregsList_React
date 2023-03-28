@@ -18,7 +18,7 @@ function HomePage() {
     }
   }
 
-  // Why no passing to service?
+  // Why no passing to service here? Definitely need this or everything breaks.
   function createCar() {
     AppState.car = new Car({})
   }
@@ -58,11 +58,13 @@ function HomePage() {
       <div className="modal fade" id="carModal" tabIndex={-1} aria-labelledby="carModalLabel" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Car</h1>
-              <button className="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Car</h1>
+                <button className="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              {AppState.car ? <CarForm /> : null}
             </div>
-            <CarForm />
           </div>
         </div>
       </div>
